@@ -1,10 +1,14 @@
+import { Routes, Route } from "react-router-dom"
+
 import CheckList from "./components/CheckList"
+import Calendar from "./components/Calendar"
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-[90vh] w-full">
-      <CheckList />
-    </div>
+    <Routes>
+      <Route path="/" element={<CheckList />} />
+      <Route path="/calendar" element={<Calendar />} />
+    </Routes>
   )
 }
 

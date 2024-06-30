@@ -26,7 +26,16 @@ const GetTask = async () => {
     }
 }
 
+const CalendarData = async () => {
+    try {
+        return await Client.post('/task/calendar')
+    } catch (e) {
+        return e
+    }
+}
+
 export {
     TaskTrackerService,
-    GetTask
+    GetTask,
+    CalendarData
 }
