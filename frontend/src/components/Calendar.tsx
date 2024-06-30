@@ -88,13 +88,13 @@ const Calendar = () => {
         {data.map((item: TrackerState, index: number) => (
           <Card
             key={index}
-            className={`flex flex-col gap-2 relative h-72 bg-${
+            className={`flex flex-col gap-2 relative h-72 ${
               item.doneThings === 0
-                ? "red"
+                ? "bg-red-200"
                 : item.doneThings === 6
-                ? "green"
-                : "yellow"
-            }-200`}
+                ? "bg-green-200"
+                : "bg-yellow-200"
+            }`}
           >
             <p className="text-center">{item.day.valueOf()} July, 2024</p>
             <p className="absolute right-2 top-2 rounded-full bg-white py-2.5 px-1.5">
