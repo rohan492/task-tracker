@@ -18,4 +18,11 @@ router.post('/getTask', (req, res) => {
       })
 })
 
+router.post('/calendar', (req, res) => {
+  Task.find()
+    .then(existingTask => {
+      res.json(existingTask)
+    })
+})
+
 export default router
