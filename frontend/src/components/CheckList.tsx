@@ -1,0 +1,91 @@
+import { useState } from "react";
+import { Card, Checkbox } from "antd";
+import type { CheckboxProps } from "antd";
+import { TaskTrackerService } from "../services/AuthServices.ts";
+
+type TrackerKeys =
+  | "dsa"
+  | "course"
+  | "exercise"
+  | "temple"
+  | "6wake"
+  | "11sleep";
+
+interface TrackerState {
+  day: Number;
+  dsa: boolean;
+  course: boolean;
+  exercise: boolean;
+  temple: boolean;
+  "6wake": boolean;
+  "11sleep": boolean;
+}
+
+const CheckList = () => {
+  const [tracker, setTracker] = useState<TrackerState>({
+    day: new Date().getDate(),
+    dsa: false,
+    course: false,
+    exercise: false,
+    temple: false,
+    "6wake": false,
+    "11sleep": false,
+  });
+  const onChange: CheckboxProps["onChange"] = (e) => {
+    const { value, checked } = e.target;
+    setTracker((prevTracker) => ({
+      ...prevTracker,
+      [value]: checked,
+    }));
+  };
+  const handleSubmit = async () => {
+    console.log(tracker);
+    const response = await TaskTrackerService(tracker)
+    console.log(response)
+  };
+  return (
+    <Card className="bg-indigo-300 flex flex-col gap-5 w-[50%]">
+      <div className="flex justify-between items-center w-full mb-1">
+        <p className="ml-20 underline">Title</p>
+        <p className="mb-32">Day {new Date().getDate()}</p>
+        <p className="underline">Check List</p>
+      </div>
+      <div className="-mt-10">
+        {[
+          { label: "5 DSA Questions", value: "dsa" },
+          {
+            label: "1 Harkirat's Course Video from Cohort 2.0",
+            value: "course",
+          },
+          { label: "1 Hour Physical Activity", value: "exercise" },
+          {
+            label: "No Sugar / Cigarette / Alcohol / Fried Outside Food",
+            value: "temple",
+          },
+          { label: "Wake up at 6 AM", value: "6wake" },
+          { label: "Go to Bed at 11 PM", value: "11sleep" },
+        ].map(({ label, value }, index) => (
+          <div key={index} className="flex justify-between items-center w-full">
+            <p>{label}</p>
+            <Checkbox
+              onChange={onChange}
+              className="mr-6"
+              value={value}
+              checked={tracker[value as TrackerKeys]}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-end items-center mt-10">
+        <p
+          className="px-4 py-2 rounded-md bg-[#E07E65] text-white hover:scale-105 duration-300 ease-in-out cursor-pointer"
+          onClick={handleSubmit}
+        >
+          Submit
+        </p>
+      </div>
+    </Card>
+  );
+};
+
+export default CheckList;
