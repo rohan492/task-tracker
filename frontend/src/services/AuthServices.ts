@@ -18,6 +18,15 @@ const TaskTrackerService = async (formdata: TrackerState) => {
     }
 }
 
+const GetTask = async () => {
+    try {
+        return await Client.post('/task/getTask')
+    } catch (e) {
+        return e
+    }
+}
+
 export {
-    TaskTrackerService
+    TaskTrackerService,
+    GetTask
 }

@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Card, Checkbox } from "antd";
+import { useState, useEffect } from "react";
+import { Card, Checkbox, message } from "antd";
 import type { CheckboxProps } from "antd";
-import { TaskTrackerService } from "../services/AuthServices.ts";
+import { GetTask, TaskTrackerService } from "../services/AuthServices.ts";
 
 type TrackerKeys =
   | "dsa"
@@ -31,6 +31,16 @@ const CheckList = () => {
     "6wake": false,
     "11sleep": false,
   });
+  const getAllTasks = async () => {
+    const response: any = await GetTask();
+    console.log(response.data);
+    if (response?.data) {
+      setTracker(response.data)
+    }
+  };
+  useEffect(() => {
+    getAllTasks()
+  }, [])
   const onChange: CheckboxProps["onChange"] = (e) => {
     const { value, checked } = e.target;
     setTracker((prevTracker) => ({
@@ -40,8 +50,9 @@ const CheckList = () => {
   };
   const handleSubmit = async () => {
     console.log(tracker);
-    const response = await TaskTrackerService(tracker)
-    console.log(response)
+    const response: any = await TaskTrackerService(tracker)
+    console.log(response?.data?.msg)
+    message.success(response?.data?.msg)
   };
   return (
     <Card className="bg-indigo-300 flex flex-col gap-5 w-[50%]">
