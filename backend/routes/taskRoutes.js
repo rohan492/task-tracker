@@ -11,4 +11,11 @@ router.post('/track', updateExisting, (req, res) => {
     res.json({ msg: "Task Created Successfully" })
 })
 
+router.post('/getTask', (req, res) => {
+    Task.findOne({ day: new Date().getDate() })
+      .then(existingTask => {
+        res.json(existingTask)
+      })
+})
+
 export default router
