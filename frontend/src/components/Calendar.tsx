@@ -5,24 +5,24 @@ import { CalendarData } from "../services/TaskServices";
 
 interface TrackerState {
   day: Number;
-  dsa: boolean;
-  course: boolean;
-  exercise: boolean;
-  temple: boolean;
-  "6wake": boolean;
-  "11sleep": boolean;
+  interview: Boolean;
+  course: Boolean;
+  "course3": Boolean;
+  dsa: Boolean;
+  exercise: Boolean;
+  temple: Boolean;
   doneThings?: Number;
 }
 
 const mapper: Record<keyof TrackerState, string> = {
   doneThings: "doneThings",
   day: "day",
-  dsa: "5 DSA Questions",
+  interview: "Apply to Open Positions + Send Cold Emails",
   course: "1 Harkirat's Course Video from Cohort 2.0",
+  "course3": "Be in-sync with Harkirat's Web3.0 Content & Assignments",
+  dsa: "2 DSA Questions + Revise Patterns Encountered",
   exercise: "1 Hour Physical Activity",
-  temple: "No Sugar / Cigarette / Alcohol / Fried Outside Food",
-  "6wake": "Wake up at 6 AM",
-  "11sleep": "Go to Bed at 11 PM",
+  temple: "No Cigarette / Alcohol / Outside Food"
 };
 
 const Calendar = () => {

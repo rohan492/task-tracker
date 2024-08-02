@@ -2,12 +2,12 @@ import { Client } from "./Client";
 
 interface TrackerState {
     day: Number;
-    dsa: boolean;
-    course: boolean;
-    exercise: boolean;
-    temple: boolean;
-    "6wake": boolean;
-    "11sleep": boolean;
+    interview: Boolean;
+    course: Boolean;
+    "course3": Boolean;
+    dsa: Boolean;
+    exercise: Boolean;
+    temple: Boolean;
 }
 
 const TaskTrackerService = async (formdata: TrackerState) => {

@@ -6,23 +6,23 @@ import { useNavigate } from "react-router-dom";
 
 interface TrackerState {
   day: Number;
-  dsa: boolean;
-  course: boolean;
-  exercise: boolean;
-  temple: boolean;
-  "6wake": boolean;
-  "11sleep": boolean;
+  interview: Boolean;
+  course: Boolean;
+  "course3": Boolean;
+  dsa: Boolean;
+  exercise: Boolean;
+  temple: Boolean;
 }
 
 const CheckList = () => {
   const [tracker, setTracker] = useState<TrackerState>({
     day: new Date().getDate(),
-    dsa: false,
+    interview: false,
     course: false,
+    "course3": false,
+    dsa: false,
     exercise: false,
-    temple: false,
-    "6wake": false,
-    "11sleep": false,
+    temple: false
   });
   const getAllTasks = async () => {
     const response: any = await GetTask();
@@ -64,18 +64,24 @@ const CheckList = () => {
         </div>
         <div className="-mt-10">
           {[
-            { label: "5 DSA Questions", value: "dsa" },
+            { label: "Apply to Open Positions + Send Cold Emails", value: "interview" },
             {
               label: "1 Harkirat's Course Video from Cohort 2.0",
               value: "course",
             },
+            {
+              label: "Be in-sync with Harkirat's Web3.0 Content & Assignments",
+              value: "course3",
+            },
+            {
+              label: "2 DSA Questions + Revise Patterns Encountered",
+              value: "dsa",
+            },
             { label: "1 Hour Physical Activity", value: "exercise" },
             {
-              label: "No Sugar / Cigarette / Alcohol / Fried Outside Food",
+              label: "No Cigarette / Alcohol / Outside Food",
               value: "temple",
-            },
-            { label: "Wake up at 6 AM", value: "6wake" },
-            { label: "Go to Bed at 11 PM", value: "11sleep" },
+            }
           ].map(({ label, value }, index) => (
             <div
               key={index}
