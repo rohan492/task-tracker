@@ -96,7 +96,7 @@ const Calendar = () => {
                 : "bg-yellow-200"
             }`}
           >
-            <p className="text-center">{item.day.valueOf()} July, 2024</p>
+            <p className="text-center">{item.day.valueOf()} August, 2024</p>
             <p className="absolute right-2 top-2 rounded-full bg-white py-2.5 px-1.5">
               {renderPercentage(item)}
             </p>
