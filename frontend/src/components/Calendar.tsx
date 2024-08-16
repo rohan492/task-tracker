@@ -19,7 +19,7 @@ const mapper: Record<keyof TrackerState, string> = {
   day: "day",
   interview: "Apply to Open Positions + Send Cold Emails",
   course: "1 Harkirat's Course Video from Cohort 2.0",
-  "course3": "Be in-sync with Harkirat's Web3.0 Content & Assignments",
+  "course3": "Be in-sync with Harkirat's Web3.0 Content",
   dsa: "2 DSA Questions + Revise Patterns Encountered",
   exercise: "1 Hour Physical Activity",
   temple: "No Cigarette / Alcohol / Outside Food"
