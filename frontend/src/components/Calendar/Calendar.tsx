@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card } from "antd";
 import { useNavigate } from "react-router-dom";
-import { CalendarData } from "../services/TaskServices";
+import { CalendarData } from "../../services/TaskServices";
+import "./Calendar.css";
 
 interface TrackerState {
   day: Number;
@@ -19,7 +20,7 @@ const mapper: Record<keyof TrackerState, string> = {
   day: "day",
   interview: "Apply to Open Positions + Send Cold Emails",
   course: "1 Harkirat's Course Video from Cohort 2.0",
-  "course3": "Be in-sync with Harkirat's Web3.0 Content",
+  "course3": "Be in-sync with Harkirat's Web3.0 Content + Assignments",
   dsa: "2 DSA Questions + Revise Patterns Encountered",
   exercise: "1 Hour Physical Activity",
   temple: "No Cigarette / Alcohol / Outside Food"
@@ -57,7 +58,8 @@ const Calendar = () => {
     return Object.entries(item).map(
       ([key, value]: [string, boolean], idx: number) => {
         if (typeof value === "boolean" && value === val) {
-          return <div key={idx}>{mapper[key as keyof TrackerState]}</div>;
+          const val: string = mapper[key as keyof TrackerState]
+          return <div key={idx} className="text-[8px]">{val?.length > 43 ? val?.slice(0, 43) + "..." : val}</div>;
         }
         return null;
       }
@@ -84,11 +86,11 @@ const Calendar = () => {
           {data?.filter(it => it?.doneThings === 6)?.length} / 31
         </div>
       </div>
-      <div className="flex gap-5 items-center flex-wrap">
+      <div className="flex gap-2 items-center flex-wrap">
         {data.map((item: TrackerState, index: number) => (
           <Card
             key={index}
-            className={`flex flex-col gap-2 relative h-72 ${
+            className={`flex flex-col gap-2 relative h-[11.5rem] w-[13.5] antCard hover:scale-110 duration-300 ease-in-out hover:shadow-md ${
               item.doneThings === 0
                 ? "bg-red-200"
                 : item.doneThings === 6
@@ -96,19 +98,19 @@ const Calendar = () => {
                 : "bg-yellow-200"
             }`}
           >
-            <p className="text-center">{item.day.valueOf()} August, 2024</p>
-            <p className="absolute right-2 top-2 rounded-full bg-white py-2.5 px-1.5">
+            <p className="text-center text-[8px]">{item.day.valueOf()} August, 2024</p>
+            <p className="absolute right-2 top-2 rounded-full bg-white py-2.5 px-1.5 text-[8px]">
               {renderPercentage(item)}
             </p>
             {item.doneThings !== 0 && (
               <>
-                <p className="underline">Done</p>
+                <p className="underline text-[8px]">Done</p>
                 {renderValue(item, true)}
               </>
             )}
             {item.doneThings !== 6 && (
               <>
-                <p className="underline mt-5">Not Done</p>
+                <p className={`underline ${item.doneThings !== 0 && 'mt-5'} text-[8px]`}>Not Done</p>
                 {renderValue(item, false)}
               </>
             )}

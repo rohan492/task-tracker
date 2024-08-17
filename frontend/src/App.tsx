@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 
 import CheckList from "./components/CheckList"
-import Calendar from "./components/Calendar"
+import Calendar from "./components/Calendar/Calendar"
 
 function App() {
   return (
