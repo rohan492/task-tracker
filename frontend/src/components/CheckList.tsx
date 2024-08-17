@@ -70,7 +70,7 @@ const CheckList = () => {
               value: "course",
             },
             {
-              label: "Be in-sync with Harkirat's Web3.0 Content",
+              label: "Be in-sync with Harkirat's Web3.0 Content + Assignments",
               value: "course3",
             },
             {
