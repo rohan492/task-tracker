@@ -7,11 +7,11 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING)
 
 const TaskSchema = new mongoose.Schema({
     day: Number,
-    interview: Boolean,
-    course: Boolean,
-    "course3": Boolean,
     dsa: Boolean,
-    exercise: Boolean,
+    course: Boolean,
+    oats: Boolean,
+    workout: Boolean,
+    cohort: Boolean,
     temple: Boolean
 })
 
