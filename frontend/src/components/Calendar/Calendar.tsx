@@ -3,6 +3,7 @@ import { Card } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CalendarData } from "../../services/TaskServices";
 import "./Calendar.css";
+import { DateTime } from 'luxon'
 
 import { TrackerState, mapper } from "../../utils/state";
 
@@ -66,7 +67,7 @@ const Calendar = () => {
           Add Tasks
         </div>
         <div className="mr-4">
-          {data?.filter(it => it?.doneThings === 6)?.length} / 31
+          {data?.filter(it => it?.doneThings === 6)?.length} / {DateTime.now().daysInMonth}
         </div>
       </div>
       <div className="flex gap-2 items-center flex-wrap">
