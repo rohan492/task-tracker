@@ -1,16 +1,8 @@
 import { Client } from "./Client";
 
-interface TrackerState {
-    day: Number;
-    interview: Boolean;
-    course: Boolean;
-    "course3": Boolean;
-    dsa: Boolean;
-    exercise: Boolean;
-    temple: Boolean;
-}
+import { TrackerState } from "../utils/state";
 
-const TaskTrackerService = async (formdata: TrackerState) => {
+const TaskTrackerService = async (formdata: Partial<TrackerState>) => {
     try {
         return await Client.post('/task/track', formdata)
     } catch (e) {
