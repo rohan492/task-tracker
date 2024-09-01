@@ -4,26 +4,10 @@ import type { CheckboxProps } from "antd";
 import { GetTask, TaskTrackerService } from "../services/TaskServices.ts";
 import { useNavigate } from "react-router-dom";
 
-interface TrackerState {
-  day: Number;
-  interview: Boolean;
-  course: Boolean;
-  "course3": Boolean;
-  dsa: Boolean;
-  exercise: Boolean;
-  temple: Boolean;
-}
+import { mapper, TrackerState, initialTrackerState } from "../utils/state.ts";
 
 const CheckList = () => {
-  const [tracker, setTracker] = useState<TrackerState>({
-    day: new Date().getDate(),
-    interview: false,
-    course: false,
-    "course3": false,
-    dsa: false,
-    exercise: false,
-    temple: false
-  });
+  const [tracker, setTracker] = useState<Partial<TrackerState>>(initialTrackerState);
   const getAllTasks = async () => {
     const response: any = await GetTask();
     console.log(response.data);
@@ -63,26 +47,12 @@ const CheckList = () => {
           <p className="underline">Check List</p>
         </div>
         <div className="-mt-10">
-          {[
-            { label: "Apply to Open Positions + Send Cold Emails", value: "interview" },
+          {Object.entries(mapper)?.filter(([key, _]) => !["doneThings", "day"].includes(key))?.map(([key, value]) => (
             {
-              label: "1 Harkirat's Course Video from Cohort 2.0",
-              value: "course",
-            },
-            {
-              label: "Be in-sync with Harkirat's Web3.0 Content + Assignments",
-              value: "course3",
-            },
-            {
-              label: "2 DSA Questions + Revise Patterns Encountered",
-              value: "dsa",
-            },
-            { label: "1 Hour Physical Activity", value: "exercise" },
-            {
-              label: "No Cigarette / Alcohol / Outside Food",
-              value: "temple",
+              label: value,
+              value: key as keyof TrackerState
             }
-          ].map(({ label, value }, index) => (
+          )).map(({ label, value }, index) => (
             <div
               key={index}
               className="flex justify-between items-center w-full"

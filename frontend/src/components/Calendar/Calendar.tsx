@@ -4,27 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CalendarData } from "../../services/TaskServices";
 import "./Calendar.css";
 
-interface TrackerState {
-  day: Number;
-  interview: Boolean;
-  course: Boolean;
-  "course3": Boolean;
-  dsa: Boolean;
-  exercise: Boolean;
-  temple: Boolean;
-  doneThings?: Number;
-}
-
-const mapper: Record<keyof TrackerState, string> = {
-  doneThings: "doneThings",
-  day: "day",
-  interview: "Apply to Open Positions + Send Cold Emails",
-  course: "1 Harkirat's Course Video from Cohort 2.0",
-  "course3": "Be in-sync with Harkirat's Web3.0 Content + Assignments",
-  dsa: "2 DSA Questions + Revise Patterns Encountered",
-  exercise: "1 Hour Physical Activity",
-  temple: "No Cigarette / Alcohol / Outside Food"
-};
+import { TrackerState, mapper } from "../../utils/state";
 
 const Calendar = () => {
   const [data, setData] = useState<TrackerState[]>([]);
@@ -54,17 +34,20 @@ const Calendar = () => {
   useEffect(() => {
     getData();
   }, []);
-  const renderValue = (item: TrackerState, val: boolean) => {
-    return Object.entries(item).map(
-      ([key, value]: [string, boolean], idx: number) => {
-        if (typeof value === "boolean" && value === val) {
-          const val: string = mapper[key as keyof TrackerState]
-          return <div key={idx} className="text-[8px]">{val?.length > 43 ? val?.slice(0, 43) + "..." : val}</div>;
-        }
-        return null;
+  const renderValue = (item: Partial<TrackerState>, val: boolean) => {
+    return Object.entries(item).map(([key, value], idx: number) => {
+      // Check if value is a boolean before proceeding
+      if (typeof value === "boolean" && value === val) {
+        const label: string = mapper[key as keyof TrackerState];
+        return (
+          <div key={idx} className="text-[8px]">
+            {label.length > 43 ? label.slice(0, 43) + "..." : label}
+          </div>
+        );
       }
-    );
-  };
+      return null;
+    });
+  };  
   const renderPercentage = (item: TrackerState) => {
     const doneThings = item?.doneThings?.valueOf() ?? 0;
     const percentage = (doneThings / 6) * 100;
@@ -98,7 +81,7 @@ const Calendar = () => {
                 : "bg-yellow-200"
             }`}
           >
-            <p className="text-center text-[8px]">{item.day.valueOf()} August, 2024</p>
+            <p className="text-center text-[8px]">{item.day.valueOf()} {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date())}, {new Date().getFullYear()}</p>
             <p className="absolute right-2 top-2 rounded-full bg-white py-2.5 px-1.5 text-[8px]">
               {renderPercentage(item)}
             </p>
