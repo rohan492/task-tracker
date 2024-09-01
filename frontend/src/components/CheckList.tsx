@@ -43,7 +43,7 @@ const CheckList = () => {
         </div>
         <div className="flex justify-between items-center w-full mb-1">
           <p className="ml-20 underline">Title</p>
-          <p className="mb-32">Day {new Date().getDate()}</p>
+          <p className="mb-32">{new Date().getDate()} {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date())}, {new Date().getFullYear()}</p>
           <p className="underline">Check List</p>
         </div>
         <div className="-mt-10">

@@ -3,24 +3,24 @@ const trackerConfig = {
   day: { label: "day", type: "number" as const },
   doneThings: { label: "doneThings", type: "number" as const },
 
-  interview: {
-    label: "Apply to Open Positions + Send Cold Emails",
+  dsa: {
+    label: "(DSA) Revise 10 Questions + Do 2 Questions",
     type: "boolean" as const,
   },
   course: {
-    label: "1 Harkirat's Course Video from Cohort 2.0",
+    label: "Be in-sync with Web3 Content",
     type: "boolean" as const,
   },
-  course3: {
-    label: "Be in-sync with Harkirat's Web3.0 Content + Assignments",
+  oats: {
+    label: "Oats as Breakfast",
     type: "boolean" as const,
   },
-  dsa: {
-    label: "2 DSA Questions + Revise Patterns Encountered",
+  workout: {
+    label: "Workout",
     type: "boolean" as const,
   },
-  exercise: {
-    label: "1 Hour Physical Activity",
+  cohort: {
+    label: "Consume 1 Cohort 2.0 Video",
     type: "boolean" as const,
   },
   temple: {
