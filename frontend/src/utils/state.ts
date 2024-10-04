@@ -59,3 +59,15 @@ export const initialTrackerState = (): TrackerState => {
 
     return initialState as TrackerState
 }
+
+export type CardProps = {
+  item: TrackerState | null;
+  onClick: (item: TrackerState) => void;
+  renderPercentage: (item: Partial<TrackerState>) => string;
+  renderValue: (
+    item: Partial<TrackerState>,
+    val: boolean,
+    modal?: boolean
+  ) => JSX.Element[];
+  modalComponent: boolean;
+};
