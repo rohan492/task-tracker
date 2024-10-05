@@ -39,7 +39,7 @@ const CheckList = () => {
           className="absolute left-2 top-4 px-4 py-2 rounded-md bg-[#609DA1] text-white hover:scale-105 duration-300 ease-in-out cursor-pointer"
           onClick={() => navigate("/calendar")}
         >
-          View Tasks
+          View Calendar
         </div>
         <div className="flex justify-between items-center w-full mb-1">
           <p className="ml-20 underline">Title</p>
