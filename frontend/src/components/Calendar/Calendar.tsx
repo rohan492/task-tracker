@@ -47,7 +47,7 @@ const Calendar = () => {
         return (
           <div key={key} className={`flex items-start gap-1 ${modal ? 'text-base' : 'text-[8px]'} pl-1`}>
             <span>{counter}. </span>
-            <span className="break-words">{label.length > 43 ? label.slice(0, 43) + "..." : label}</span>
+            <span className="break-words">{label}</span>
           </div>
         );
       });
