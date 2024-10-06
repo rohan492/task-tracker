@@ -34,6 +34,12 @@ const CheckList = () => {
   const navigate = useNavigate();
   return (
     <div className="flex justify-center items-center h-[90vh] w-full">
+      <div
+        className="absolute right-10 top-4 px-4 py-2 rounded-md bg-[#609DA1] text-white hover:scale-105 duration-300 ease-in-out cursor-pointer"
+        onClick={() => navigate("/create")}
+      >
+        Create New Tasks
+      </div>
       <Card className="bg-indigo-300 flex flex-col gap-5 w-[50%] relative">
         <div
           className="absolute left-2 top-4 px-4 py-2 rounded-md bg-[#609DA1] text-white hover:scale-105 duration-300 ease-in-out cursor-pointer"
