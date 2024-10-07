@@ -47,18 +47,20 @@ export const mapper: Record<keyof TrackerState, string> = Object.keys(
 
 // Initial State for CheckList.tsx
 export const initialTrackerState = (): TrackerState => {
-    const initialState: Partial<TrackerState> = {};
+  const initialState: Partial<TrackerState> = {};
 
-    Object.keys(trackerConfig).forEach(key => {
-        if (key === "day") {
-            initialState[key as keyof TrackerState] = new Date().getDate() as any
-        } else if (trackerConfig[key as keyof typeof trackerConfig].type === "boolean") {
-            initialState[key as keyof TrackerState] = false as any
-        }
-    })
+  Object.keys(trackerConfig).forEach((key) => {
+    if (key === "day") {
+      initialState[key as keyof TrackerState] = new Date().getDate() as any;
+    } else if (
+      trackerConfig[key as keyof typeof trackerConfig].type === "boolean"
+    ) {
+      initialState[key as keyof TrackerState] = false as any;
+    }
+  });
 
-    return initialState as TrackerState
-}
+  return initialState as TrackerState;
+};
 
 export type CardProps = {
   item: TrackerState | null;
@@ -71,3 +73,14 @@ export type CardProps = {
   ) => JSX.Element[];
   modalComponent: boolean;
 };
+
+export interface TaskState {
+  task: {
+    value: string;
+    placeHolder: string;
+  };
+  motive: {
+    value: string;
+    placeHolder: string;
+  };
+}
