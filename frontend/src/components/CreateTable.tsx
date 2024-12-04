@@ -17,6 +17,8 @@ import { CSS } from "@dnd-kit/utilities";
 import { Table } from "antd";
 import type { TableColumnsType } from "antd";
 import { TaskState } from "../utils/state";
+import { DateTime } from "luxon";
+import { TaskTrackerService } from "../services/TaskServices";
 
 interface DataType {
   key: string;
@@ -80,8 +82,18 @@ const CreateTable = ({ tasks }: { tasks: TaskState[] }) => {
         motive: item?.motive?.value,
       }))
   );
+  const handleSaveTask = async () => {
+    const mappedToTask = dataSource?.reduce((acc, { task }) => {
+      return { ...acc, [task]: false };
+    }, {});
+    const newTaskCreated = {
+      day: DateTime.now().day,
+      taskArray: mappedToTask,
+    };
+    await TaskTrackerService(newTaskCreated);
+  };
   useEffect(() => {
-    console.log(dataSource);
+    handleSaveTask();
   }, [dataSource]);
 
   const sensors = useSensors(

@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { mapper, TrackerState, initialTrackerState } from "../utils/state.ts";
 
 const CheckList = () => {
-  const [tracker, setTracker] = useState<Partial<TrackerState>>(initialTrackerState);
+  const [tracker, setTracker] =
+    useState<Partial<TrackerState>>(initialTrackerState);
   const getAllTasks = async () => {
     const response: any = await GetTask();
     console.log(response.data);
     if (response?.data) {
       setTracker(response.data);
+    } else {
+      navigate("/create");
     }
   };
   useEffect(() => {
@@ -49,29 +52,36 @@ const CheckList = () => {
         </div>
         <div className="flex justify-between items-center w-full mb-1">
           <p className="ml-20 underline">Title</p>
-          <p className="mb-32">{new Date().getDate()} {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date())}, {new Date().getFullYear()}</p>
+          <p className="mb-32">
+            {new Date().getDate()}{" "}
+            {new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+              new Date()
+            )}
+            , {new Date().getFullYear()}
+          </p>
           <p className="underline">Check List</p>
         </div>
         <div className="-mt-10">
-          {Object.entries(mapper)?.filter(([key, _]) => !["doneThings", "day"].includes(key))?.map(([key, value]) => (
-            {
+          {Object.entries(mapper)
+            ?.filter(([key, _]) => !["doneThings", "day"].includes(key))
+            ?.map(([key, value]) => ({
               label: value,
-              value: key as keyof TrackerState
-            }
-          )).map(({ label, value }, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center w-full"
-            >
-              <p>{label}</p>
-              <Checkbox
-                onChange={onChange}
-                className="mr-6"
-                value={value}
-                checked={tracker[value as keyof TrackerState] as boolean}
-              />
-            </div>
-          ))}
+              value: key as keyof TrackerState,
+            }))
+            .map(({ label, value }, index) => (
+              <div
+                key={index}
+                className="flex justify-between items-center w-full"
+              >
+                <p>{label}</p>
+                <Checkbox
+                  onChange={onChange}
+                  className="mr-6"
+                  value={value}
+                  checked={tracker?.taskArray?.[value] || false}
+                />
+              </div>
+            ))}
         </div>
         <div className="flex justify-end items-center mt-10">
           <p
