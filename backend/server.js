@@ -6,6 +6,9 @@ import dotenv from 'dotenv'
 import authMiddleware from './middlewares/authMiddleWare.js'
 import taskRouter from './routes/taskRoutes.js'
 
+import cron from 'node-cron'
+import axios from 'axios'
+
 dotenv.config()
 
 const corsOptions = {
@@ -29,6 +32,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(authMiddleware)
 
 app.use('/task', taskRouter)
+
+cron.schedule('*/5 * * * *', async () => {
+    try {
+        const res = await axios.create({
+            baseURL: process.env.BACKEND_URL,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${process.env.BACKEND_TOKEN}`,
+            },
+          }).post('/task/calendar');
+    } catch(e) {
+        console.error(e)
+    }
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`SERVER RUNNING ON PORT ${process.env.PORT}`)
