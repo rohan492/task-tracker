@@ -3,28 +3,24 @@ const trackerConfig = {
   day: { label: "day", type: "number" as const },
   doneThings: { label: "doneThings", type: "number" as const },
 
+  eggs: {
+    label: "6 eggs (36g protein)",
+    type: "boolean" as const,
+  },
+  macro: {
+    label: "150g chicken breast / 150g paneer (~34g protein)",
+    type: "boolean" as const,
+  },
+  read: {
+    label: "Read about coding topics (interview prep)",
+    type: "boolean" as const,
+  },
   dsa: {
-    label: "(DSA) Revise 10 Questions + Do 2 Questions",
-    type: "boolean" as const,
-  },
-  course: {
-    label: "Be in-sync with Web3 Content",
-    type: "boolean" as const,
-  },
-  oats: {
-    label: "Oats as Breakfast",
-    type: "boolean" as const,
-  },
-  workout: {
-    label: "Workout",
-    type: "boolean" as const,
-  },
-  cohort: {
-    label: "Consume 1 Cohort 2.0 Video",
+    label: "DSA (3 questions)",
     type: "boolean" as const,
   },
   temple: {
-    label: "No Cigarette / Alcohol / Outside Food",
+    label: "No Cigarette",
     type: "boolean" as const,
   },
 };

@@ -1,8 +1,13 @@
 import { CardProps } from "../../utils/state";
 import { Card } from "antd";
 
-
-const CardComponent = ({ item, onClick, renderPercentage, renderValue, modalComponent }: CardProps) => {
+const CardComponent = ({
+  item,
+  onClick,
+  renderPercentage,
+  renderValue,
+  modalComponent,
+}: CardProps) => {
   return (
     <Card
       className={`flex flex-col gap-2 relative ${
@@ -11,7 +16,7 @@ const CardComponent = ({ item, onClick, renderPercentage, renderValue, modalComp
       } antCard ${
         item?.doneThings === 0
           ? "bg-red-200"
-          : item?.doneThings === 6
+          : item?.doneThings === Number(import.meta.env.VITE_TOTAL_TASKS)
           ? "bg-green-200"
           : "bg-yellow-200"
       }`}
@@ -45,7 +50,7 @@ const CardComponent = ({ item, onClick, renderPercentage, renderValue, modalComp
           {item ? renderValue(item, true, modalComponent) : ""}
         </>
       )}
-      {item?.doneThings !== 6 && (
+      {item?.doneThings !== import.meta.env.VITE_TOTAL_TASKS && (
         <>
           <p
             className={`underline ${item?.doneThings !== 0 && "mt-5"} ${

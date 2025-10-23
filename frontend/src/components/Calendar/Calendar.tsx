@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CalendarData } from "../../services/TaskServices";
 import "./Calendar.css";
-import { DateTime } from 'luxon'
+// import { DateTime } from "luxon";
 
 import { TrackerState, mapper } from "../../utils/state";
 import CardComponent from "./CardComponent";
@@ -37,7 +37,11 @@ const Calendar = () => {
   useEffect(() => {
     getData();
   }, []);
-  const renderValue = (item: Partial<TrackerState>, val: boolean, modal?: boolean) => {
+  const renderValue = (
+    item: Partial<TrackerState>,
+    val: boolean,
+    modal?: boolean
+  ) => {
     let counter: number = 0;
     return Object.entries(item)
       ?.filter(([_, value]) => typeof value === "boolean" && value === val)
@@ -45,7 +49,12 @@ const Calendar = () => {
         const label: string = mapper[key as keyof TrackerState];
         counter++;
         return (
-          <div key={key} className={`flex items-start gap-1 ${modal ? 'text-base' : 'text-[8px]'} pl-1`}>
+          <div
+            key={key}
+            className={`flex items-start gap-1 ${
+              modal ? "text-base" : "text-[8px]"
+            } pl-1`}
+          >
             <span>{counter}. </span>
             <span className="break-words">{label}</span>
           </div>
@@ -54,7 +63,7 @@ const Calendar = () => {
   };
   const renderPercentage = (item: Partial<TrackerState>) => {
     const doneThings = item?.doneThings?.valueOf() ?? 0;
-    const percentage = (doneThings / 6) * 100;
+    const percentage = (doneThings / import.meta.env.VITE_TOTAL_TASKS) * 100;
     const formattedPercentage =
       percentage % 10 !== 0 ? percentage.toFixed(2) : percentage.toFixed(0);
 
@@ -63,19 +72,27 @@ const Calendar = () => {
   return (
     <div className="flex flex-col gap-10 p-2">
       <Modal
-        title={<p className="text-center text-2xl font-bold">{selectedDay?.day.valueOf()} {new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date())}, {new Date().getFullYear()}</p>}
+        title={
+          <p className="text-center text-2xl font-bold">
+            {selectedDay?.day.valueOf()}{" "}
+            {new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+              new Date()
+            )}
+            , {new Date().getFullYear()}
+          </p>
+        }
         centered
         open={selectedDay ? true : false}
         onOk={() => setSelectedDay(null)}
         onCancel={() => setSelectedDay(null)}
         footer={null}
       >
-        <CardComponent 
+        <CardComponent
           item={selectedDay}
           onClick={(item) => setSelectedDay(item)}
           renderPercentage={renderPercentage}
           renderValue={renderValue}
-          modalComponent={true} 
+          modalComponent={true}
         />
       </Modal>
       <div className="sticky z-50 top-0 bg-white">
@@ -87,7 +104,13 @@ const Calendar = () => {
             Add Tasks
           </div>
           <div className="mr-4">
-            {data?.filter(it => it?.doneThings === 6)?.length} / {DateTime.now().daysInMonth}
+            {
+              data?.filter(
+                (it) =>
+                  it?.doneThings === Number(import.meta.env.VITE_TOTAL_TASKS)
+              )?.length
+            }{" "}
+            / 5{/* / {DateTime.now().daysInMonth} */}
           </div>
         </div>
       </div>
@@ -99,7 +122,7 @@ const Calendar = () => {
             onClick={(item) => setSelectedDay(item)}
             renderPercentage={renderPercentage}
             renderValue={renderValue}
-            modalComponent={false} 
+            modalComponent={false}
           />
         ))}
       </div>
