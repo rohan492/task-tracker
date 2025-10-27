@@ -7,6 +7,7 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
 const TaskSchema = new mongoose.Schema({
   day: Number,
+  workout: Number,
   eggs: Boolean,
   macro: Boolean,
   read: Boolean,
