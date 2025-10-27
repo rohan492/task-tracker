@@ -3,6 +3,10 @@ const trackerConfig = {
   day: { label: "day", type: "number" as const },
   doneThings: { label: "doneThings", type: "number" as const },
 
+  workout: {
+    label: "Workout",
+    type: "boolean" as const,
+  },
   eggs: {
     label: "6 eggs (36g protein)",
     type: "boolean" as const,
