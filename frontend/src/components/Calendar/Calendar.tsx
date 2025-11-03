@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { CalendarData } from "../../services/TaskServices";
 import "./Calendar.css";
-// import { DateTime } from "luxon";
+import { DateTime } from "luxon";
 
 import { TrackerState, mapper } from "../../utils/state";
 import CardComponent from "./CardComponent";
@@ -110,7 +110,7 @@ const Calendar = () => {
                   it?.doneThings === Number(import.meta.env.VITE_TOTAL_TASKS)
               )?.length
             }{" "}
-            / 5{/* / {DateTime.now().daysInMonth} */}
+            / {DateTime.now().daysInMonth}
           </div>
         </div>
       </div>
