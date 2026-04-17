@@ -17,6 +17,7 @@ const TaskSchema = new mongoose.Schema({
   coffee: Boolean,
   salad: Boolean,
   snack: Boolean,
+  walk: Boolean,
 });
 
 const Task = mongoose.model("Task", TaskSchema);
