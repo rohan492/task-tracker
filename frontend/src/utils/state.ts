@@ -3,28 +3,44 @@ const trackerConfig = {
   day: { label: "day", type: "number" as const },
   doneThings: { label: "doneThings", type: "number" as const },
 
-  workout: {
-    label: "Workout",
+  pushup: {
+    label: "Pushup",
     type: "boolean" as const,
   },
-  eggs: {
-    label: "6 eggs (36g protein)",
+  squats: {
+    label: "Squats",
     type: "boolean" as const,
   },
-  macro: {
-    label: "150g chicken breast / 150g paneer (~34g protein)",
+  crunches: {
+    label: "Crunches",
     type: "boolean" as const,
   },
-  read: {
-    label: "Read about coding topics (interview prep)",
+  wake: {
+    label: "Wake up at 5:30 AM",
     type: "boolean" as const,
   },
-  dsa: {
-    label: "DSA (3 questions)",
+  sleep: {
+    label: "Sleep by 10:30 PM",
     type: "boolean" as const,
   },
-  temple: {
-    label: "No Cigarette",
+  cigg: {
+    label: "No Cigarettes",
+    type: "boolean" as const,
+  },
+  drink: {
+    label: "No Cold Drink",
+    type: "boolean" as const,
+  },
+  coffee: {
+    label: "No Coffee / Tea",
+    type: "boolean" as const,
+  },
+  salad: {
+    label: "Only Salad for lunch",
+    type: "boolean" as const,
+  },
+  snack: {
+    label: "No Evening Snack",
     type: "boolean" as const,
   },
 };
@@ -38,12 +54,15 @@ export type TrackerState = {
 
 // Derive the mapper from trackerConfig
 export const mapper: Record<keyof TrackerState, string> = Object.keys(
-  trackerConfig
-).reduce((acc, key) => {
-  acc[key as keyof TrackerState] =
-    trackerConfig[key as keyof typeof trackerConfig].label;
-  return acc;
-}, {} as Record<keyof TrackerState, string>);
+  trackerConfig,
+).reduce(
+  (acc, key) => {
+    acc[key as keyof TrackerState] =
+      trackerConfig[key as keyof typeof trackerConfig].label;
+    return acc;
+  },
+  {} as Record<keyof TrackerState, string>,
+);
 
 // Initial State for CheckList.tsx
 export const initialTrackerState = (): TrackerState => {
@@ -69,7 +88,7 @@ export type CardProps = {
   renderValue: (
     item: Partial<TrackerState>,
     val: boolean,
-    modal?: boolean
+    modal?: boolean,
   ) => JSX.Element[];
   modalComponent: boolean;
 };

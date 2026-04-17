@@ -7,12 +7,16 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
 
 const TaskSchema = new mongoose.Schema({
   day: Number,
-  workout: Boolean,
-  eggs: Boolean,
-  macro: Boolean,
-  read: Boolean,
-  dsa: Boolean,
-  temple: Boolean,
+  pushup: Boolean,
+  squats: Boolean,
+  crunches: Boolean,
+  wake: Boolean,
+  sleep: Boolean,
+  cigg: Boolean,
+  drink: Boolean,
+  coffee: Boolean,
+  salad: Boolean,
+  snack: Boolean,
 });
 
 const Task = mongoose.model("Task", TaskSchema);
