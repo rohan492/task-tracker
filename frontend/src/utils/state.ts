@@ -43,6 +43,10 @@ const trackerConfig = {
     label: "No Evening Snack",
     type: "boolean" as const,
   },
+  walk: {
+    label: "Walk for an hour",
+    type: "boolean" as const,
+  },
 };
 
 // Derive the TrackerState type
